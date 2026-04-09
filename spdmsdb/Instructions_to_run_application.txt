@@ -1,0 +1,44 @@
+How to set up and run the soccer player database application
+
+Install Java
+Make sure you have Java 8 or higher installed on your computer.
+To check, open a terminal or command prompt and type:
+java -version
+
+2. Install MySQL
+Download and install MySQL Community Server from https://dev.mysql.com/downloads/mysql/
+During installation, remember the root password or create a new MySQL user.
+
+3. Create the sample database
+Use the provided SQL script to create the database and the players table.
+Steps:
+Open MySQL Workbench or use the mysql command line.
+Run the script:
+CREATE DATABASE soccer_db;
+USE soccer_db;
+
+CREATE TABLE players (
+player_id INT PRIMARY KEY,
+player_name VARCHAR(100),
+player_position VARCHAR(50),
+player_team VARCHAR(100),
+matches_played INT,
+goals_scored INT,
+assists INT,
+minutes_played INT
+);
+
+Add sample data (at least 20 rows) using INSERT statements.
+
+4. Run the application
+Open the project in IntelliJ IDEA or any Java IDE.
+Make sure all .java files are compiled.
+Run SoccerPlayerGUI.java.
+
+5. Connect to the Database
+When the program starts, a dialog box will appear with 4 fields:
+Server (localhost:3306)
+Database Name (spdmsdb)
+Username (root)
+Password (your MySQL password)
+Fill in the fields and click OK.
