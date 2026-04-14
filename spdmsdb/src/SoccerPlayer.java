@@ -18,6 +18,19 @@ public class SoccerPlayer {
     private int assistAmount;
     private int minutesPlayed;
 
+    /**
+     * constructor: SoccerPlayer
+     * purpose: creates a soccer player object with all player details
+     * @param id the player Id
+     * @param name the player name
+     * @param position the player's field position
+     * @param team the player's team
+     * @param matches the total matches played
+     * @param goals the total goals scored
+     * @param assists the total assists made
+     * @param minutes the total minutes played
+     */
+
     public SoccerPlayer(int id, String name, String position, String team, int matches, int goals, int assists, int minutes) {
         this.playerId = id;
         this.playerName = name;
@@ -32,8 +45,8 @@ public class SoccerPlayer {
     /**
      * method: getPlayerId
      * parameters: none
-     * return: int
      * purpose: returns the player Id
+     * @return the player Id
      */
 
     public int getPlayerId() {
@@ -43,33 +56,69 @@ public class SoccerPlayer {
     /**
      * method: getPlayerName
      * parameters: none
-     * return: String
      * purpose: returns the player name
+     * @return the player name
      */
 
     public String getPlayerName() {
         return playerName;
     }
 
+    /**
+     * method: setPlayerName
+     * purpose: updates the player name
+     * @param name the new player name
+     */
+
     public void setPlayerName(String name) {
         this.playerName = name;
     }
+
+    /**
+     * method: setPlayerPosition
+     * purpose: updates the player position
+     * @param position the new player position
+     */
 
     public void setPlayerPosition(String position) {
         this.playerPosition = position;
     }
 
+    /**
+     * method: setPlayerTeam
+     * purpose: updates the player team
+     * @param team the new player team
+     */
+
     public void setPlayerTeam(String team) {
         this.playerTeam = team;
     }
+
+    /**
+     * method: setMatchesPlayed
+     * purpose: updates matches played
+     * @param matches the total matches played
+     */
 
     public void setMatchesPlayed(int matches) {
         this.matchesPlayed = matches;
     }
 
+    /**
+     * method: setGoalScored
+     * purpose: updates goals scored
+     * @param goals total goals scored
+     */
+
     public void setGoalScored(int goals) {
         this.goalScored = goals;
     }
+
+    /**
+     * method: setAssistAmount
+     * purpose: updates assists
+     * @param assists total assists made
+     */
 
     public void setAssistAmount(int assists) {
         this.assistAmount = assists;
@@ -77,9 +126,8 @@ public class SoccerPlayer {
 
     /**
      * method: setMinutesPlayed
-     * parameters: int minutes
-     * return: void
      * purpose: updates the minutes played
+     * @param minutes total minutes played
      */
 
     public void setMinutesPlayed(int minutes) {
@@ -89,8 +137,8 @@ public class SoccerPlayer {
     /**
      * method: goalPerMatch
      * parameters: none
-     * return: double
      * purpose: calculates and returns goals per match
+     * @return goals scored per match
      */
 
     public double goalPerMatch() {
@@ -101,8 +149,8 @@ public class SoccerPlayer {
     /**
      * method: assistPerMatch
      * parameters: none
-     * return: double
      * purpose: calculates and returns assists per match
+     * @return assists per match
      */
 
     public double assistPerMatch() {
@@ -110,10 +158,24 @@ public class SoccerPlayer {
         return (double) assistAmount / matchesPlayed;
     }
 
+    /**
+     * method: minutesPerGoal
+     * parameters: none
+     * purpose: calculates average minutes needed per goal
+     * @return average minutes per goal
+     */
+
     public double minutesPerGoal() {
         if(goalScored == 0) return 0;
         return (double) minutesPlayed / goalScored;
     }
+
+    /**
+     * method: goalInvolvement
+     * parameters: none
+     * purpose: calculates goal involvement per match
+     * @return average goal involvement per match
+     */
 
     public double goalInvolvement() {
         if(matchesPlayed == 0) return 0;
@@ -123,8 +185,8 @@ public class SoccerPlayer {
     /**
      * method: performanceRating
      * parameters: none
-     * return: double
      * purpose: calculates and returns the player's performance rating
+     * @return calculated performance rating
      */
 
     public double performanceRating() {
@@ -135,8 +197,8 @@ public class SoccerPlayer {
     /**
      * method: displayPlayerRecord
      * parameters: none
-     * return: void
      * purpose: displays all player information in a readable format
+     * @return formatted player record
      */
 
     public String displayPlayerRecord() {
@@ -157,8 +219,8 @@ public class SoccerPlayer {
     /**
      * method: displayStats
      * parameters: none
-     * return: void
      * purpose: displays all calculated performance statistics of the player
+     * @return formatted player statistics
      */
 
     public String displayStats() {
@@ -173,60 +235,66 @@ public class SoccerPlayer {
     }
 
     /**
-     * The following getter methods are for testing purposes only as the program doesn't require them:
-
-     * getPlayerPosition
+     * method: getPlayerPosition
      * parameters: none
-     * return: String
      * purpose: returns the player position
-
-     * getPlayerTeam
-     * parameters: none
-     * return: String
-     * purpose: returns the player team
-
-     * getMatchesPlayed
-     * parameters: none
-     * return: int
-     * purpose: returns the number of matches played
-
-     * getGoalScored
-     * parameters: none
-     * return: int
-     * purpose: returns the number of goals scored
-
-     * getAssistAmount
-     * parameters: none
-     * return: int
-     * purpose: returns the number of assists
-
-     * getMinutesPlayed
-     * parameters: none
-     * return: int
-     * purpose: returns the number of minutes played
+     * @return the player position
      */
-
-
 
     public String getPlayerPosition() {
         return playerPosition;
     }
 
+    /**
+     * method: getPlayerTeam
+     * parameters: none
+     * purpose: returns the player team
+     * @return the player team
+     */
+
     public String getPlayerTeam() {
         return playerTeam;
     }
+
+    /**
+     * method: getMatchesPlayed
+     * parameters: none
+     * purpose: returns the number of matches played
+     * @return the number of matches played
+     */
 
     public int getMatchesPlayed() {
         return matchesPlayed;
     }
 
+    /**
+     * method: getGoalScored
+     * parameters: none
+     * purpose: returns the number of goals scored
+     * @return the number of goals scored
+     */
+
     public int getGoalScored() {
         return goalScored;
     }
 
+    /**
+     * method: getAssistAmount
+     * parameters: none
+     * purpose: returns the number of assists
+     * @return the number of assists
+     */
+
     public int getAssistAmount() {
         return assistAmount;
     }
+
+    /**
+     * method: getMinutesPlayed
+     * parameters: none
+     * purpose: returns the number of minutes played
+     * @return the number of minutes played
+     */
 
     public int getMinutesPlayed() {
         return minutesPlayed;

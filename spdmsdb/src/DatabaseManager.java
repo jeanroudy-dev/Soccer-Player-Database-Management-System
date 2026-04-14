@@ -1,3 +1,7 @@
+import java.sql.*;
+import javax.swing.*;
+import java.awt.*;
+
 /**
  * Jean Roudy Alexis
  * CEN - 3024C - 23585 - Software Development 1
@@ -5,12 +9,9 @@
  * DatabaseManager.java
  * This class manages the connection to a MySQL database.
  * It prompts the user for login credentials and provides
- * a static method to access the database connection from other classes.
+ * a reusable static connection method for the other classes
+ * in the Soccer Player Database Management System.
  */
-
-import java.sql.*;
-import javax.swing.*;
-import java.awt.*;
 
 public class DatabaseManager {
 
@@ -19,8 +20,9 @@ public class DatabaseManager {
     /**
      * constructor: DatabaseManager
      * parameters: none
-     * purpose: initializes the database manager by connecting to MySQL
-     * note: private to enforce use of the getConnection() method
+     * purpose: initializes the database manager
+     * and starts the database connection process
+     * note: private to enforce the use of getConnection()
      */
 
     private DatabaseManager() {
@@ -32,8 +34,10 @@ public class DatabaseManager {
      * method: connectToDatabase
      * parameters: none
      * return: void
-     * purpose: prompts the user for MySQL server, database name, username, and password,
-     *          then attempts to establish a connection. Exits program if connection fails.
+     * purpose: prompts the user for MySQL server,
+     * database name, username, and password,
+     * then attempts to establish a database connection.
+     * The program closes if the connection fails.
      */
 
     private void connectToDatabase() {
@@ -79,9 +83,10 @@ public class DatabaseManager {
     /**
      * method: getConnection
      * parameters: none
-     * return: Connection
      * purpose: returns the active database connection.
-     * If no connection exists or it is closed, a new DatabaseManager is created to connect.
+     * If no connection exists or the connection is closed,
+     * a new DatabaseManager object is created.
+     * @return the active MySQL database connection
      */
 
     public static Connection getConnection() {

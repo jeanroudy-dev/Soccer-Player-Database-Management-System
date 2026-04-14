@@ -1,17 +1,19 @@
+import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
+import java.awt.*;
+import java.sql.Connection;
+
 /**
  * Jean Roudy Alexis
  * CEN - 3024C - 23585 - Software Development 1
  * April 3, 2026
  * SoccerPlayerGUI.java
  * This class provides a graphical user interface for managing soccer players.
- * It allows users to upload files, view players, add, update, delete, and calculate stats.
- * The GUI uses JTable to display players and prompts users with dialogs for input.
+ * It allows users to upload files, display players, add new records,
+ * update existing records, delete players, and calculate player statistics.
+ * This class works together with PlayerManager and DatabaseManager
+ * to connect the user interface with the database system.
  */
-
-import javax.swing.*;
-import javax.swing.table.DefaultTableModel;
-import java.awt.*;
-import java.sql.Connection;
 
 public class SoccerPlayerGUI extends JFrame {
     private PlayerManager manager = new PlayerManager();
@@ -24,7 +26,8 @@ public class SoccerPlayerGUI extends JFrame {
     /**
      * constructor: SoccerPlayerGUI
      * parameters: none
-     * purpose: initializes the main window, table, and panels
+     * purpose: initializes the main application window,
+     * creates the table model, and loads the main panels
      */
 
     public SoccerPlayerGUI() {
@@ -283,9 +286,8 @@ public class SoccerPlayerGUI extends JFrame {
 
     /**
      * method: main
-     * parameters: args (String[])
-     * return: void
      * purpose: initializes the database connection and launches the GUI
+     * @param args command-line arguments
      */
 
     public static void main(String[] args) {
@@ -296,11 +298,17 @@ public class SoccerPlayerGUI extends JFrame {
 
     /**
      * class: BackgroundPanel
-     * purpose: custom JPanel that paints a background image
+     * purpose: custom JPanel used to display a scalable background image
      */
 
     private class BackgroundPanel extends JPanel {
         private Image image;
+
+        /**
+         * constructor: BackgroundPanel
+         * purpose: loads the background image from the given resource path
+         * @param path the image file resource path
+         */
         public BackgroundPanel(String path) {
             try { image = new ImageIcon(getClass().getResource(path)).getImage(); } catch(Exception e){}
         }

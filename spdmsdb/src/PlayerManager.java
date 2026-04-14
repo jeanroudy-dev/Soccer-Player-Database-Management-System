@@ -1,23 +1,38 @@
+import java.sql.*;
+import java.util.ArrayList;
+import java.io.File;
+import java.util.Scanner;
+
 /**
  * Jean Roudy Alexis
  * CEN - 3024C - 23585 - Software Development 1
  * April 3, 2026
  * PlayerManager.java
- * Manages soccer player data storage and retrieval via MySQL.
+ * This class manages soccer player data storage, retrieval,
+ * updates, and deletion using a MySQL database.
+ * It serves as the connection between the GUI and the database layer.
  */
-
-
-import java.sql.*;
-import java.util.ArrayList;
-import java.io.File;
-import java.util.Scanner;
 
 
 public class PlayerManager {
 
     private Connection connect = DatabaseManager.getConnection();
 
+    /**
+     * constructor: PlayerManager
+     * parameters: none
+     * purpose: initializes the player manager object
+     * and prepares access to the database connection
+     */
+
     public PlayerManager() {}
+
+    /**
+     * method: fileUpload
+     * purpose: reads a text file and loads valid player records into the database
+     * @param filePath the path of the selected text file
+     * @return success or error message after processing the file
+     */
 
     public String fileUpload(String filePath) {
         File file = new File(filePath);
@@ -56,6 +71,13 @@ public class PlayerManager {
         }
     }
 
+    /**
+     * method: getPlayerList
+     * parameters: none
+     * purpose: retrieves all soccer players from the database
+     * @return list of all soccer players
+     */
+
     public ArrayList<SoccerPlayer> getPlayerList() {
         ArrayList<SoccerPlayer> players = new ArrayList<>();
         String sql = "SELECT * FROM players";
@@ -81,6 +103,13 @@ public class PlayerManager {
         return players;
     }
 
+    /**
+     * method: addPlayer
+     * purpose: adds a new soccer player into the database
+     * @param player the player object to be added
+     * @return true if the player was added successfully, otherwise false
+     */
+
     public boolean addPlayer(SoccerPlayer player) {
         String sql = "INSERT INTO players " +
                 "(player_id, player_name, player_position, player_team, " +
@@ -104,6 +133,13 @@ public class PlayerManager {
         }
     }
 
+    /**
+     * method: deletePlayerId
+     * purpose: deletes a player record by Id
+     * @param id the player Id
+     * @return true if deleted successfully, otherwise false
+     */
+
     public boolean deletePlayerId(int id) {
         String sql = "DELETE FROM players WHERE player_id = ?";
         try (PreparedStatement prepstatement = connect.prepareStatement(sql)) {
@@ -114,6 +150,13 @@ public class PlayerManager {
             return false;
         }
     }
+
+    /**
+     * method: verifyDoubleId
+     * purpose: checks whether a player Id already exists
+     * @param id the player Id to verify
+     * @return true if the Id already exists, otherwise false
+     */
 
     public boolean verifyDoubleId(int id) {
         String sql = "SELECT player_id FROM players WHERE player_id = ?";
@@ -127,6 +170,13 @@ public class PlayerManager {
             return false;
         }
     }
+
+    /**
+     * method: findPlayerId
+     * purpose: finds and returns a player using the player Id
+     * @param id the player Id
+     * @return the matching SoccerPlayer object or null if not found
+     */
 
     public SoccerPlayer findPlayerId(int id) {
         String sql = "SELECT * FROM players WHERE player_id = ?";
@@ -152,29 +202,85 @@ public class PlayerManager {
         return null;
     }
 
+    /**
+     * method: playerNameUpdate
+     * purpose: updates a player's name
+     * @param id the player Id
+     * @param name the new player name
+     * @return true if updated successfully, otherwise false
+     */
+
     public boolean playerNameUpdate(int id, String name) {
         return executeUpdate("UPDATE players SET player_name = ? WHERE player_id = ?", name, id);
     }
+
+    /**
+     * method: playerPositionUpdate
+     * purpose: updates a player's position
+     * @param id the player Id
+     * @param pos the new player position
+     * @return true if updated successfully, otherwise false
+     */
 
     public boolean playerPositionUpdate(int id, String pos) {
         return executeUpdate("UPDATE players SET player_position = ? WHERE player_id = ?", pos, id);
     }
 
+    /**
+     * method: playerTeamUpdate
+     * purpose: updates a player's team
+     * @param id the player Id
+     * @param team the new player team
+     * @return true if updated successfully, otherwise false
+     */
+
     public boolean playerTeamUpdate(int id, String team) {
         return executeUpdate("UPDATE players SET player_team = ? WHERE player_id = ?", team, id);
     }
+
+    /**
+     * method: matchesPlayedUpdate
+     * purpose: updates matches played
+     * @param id the player Id
+     * @param val the updated match value
+     * @return true if updated successfully, otherwise false
+     */
 
     public boolean matchesPlayedUpdate(int id, int val) {
         return executeUpdate("UPDATE players SET matches_played = ? WHERE player_id = ?", val, id);
     }
 
+    /**
+     * method: goalsUpdate
+     * purpose: updates goals scored
+     * @param id the player Id
+     * @param val the updated goals value
+     * @return true if updated successfully, otherwise false
+     */
+
     public boolean goalsUpdate(int id, int val) {
         return executeUpdate("UPDATE players SET goals_scored = ? WHERE player_id = ?", val, id);
     }
 
+    /**
+     * method: assistsUpdate
+     * purpose: updates assists
+     * @param id the player Id
+     * @param val the updated assist value
+     * @return true if updated successfully, otherwise false
+     */
+
     public boolean assistsUpdate(int id, int val) {
         return executeUpdate("UPDATE players SET assists = ? WHERE player_id = ?", val, id);
     }
+
+    /**
+     * method: minutesUpdate
+     * purpose: updates minutes played
+     * @param id the player Id
+     * @param val the updated minute value
+     * @return true if updated successfully, otherwise false
+     */
 
     public boolean minutesUpdate(int id, int val) {
         return executeUpdate("UPDATE players SET minutes_played = ? WHERE player_id = ?", val, id);
